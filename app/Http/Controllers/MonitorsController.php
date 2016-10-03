@@ -40,7 +40,17 @@ class MonitorsController extends Controller
      */
     public function show($id)
     {
-        return view('monitors.show', ['monitor' => Monitor::findOrFail($id), 'quality_checks' => QualityCheck::all()]);
+        $monitor = Monitor::findOrFail($id);
+
+        // Run Website Quality Checks against main URL
+        $checks = QualityCheck::all();
+        $results = [];
+
+        foreach( $checks as $c ) {
+            $results[$c->id] = $c->run($monitor);
+        }
+
+        return view('monitors.show', ['monitor' => $monitor, 'quality_checks' => QualityCheck::all(), 'results' => $results]);
     }
 
     /**

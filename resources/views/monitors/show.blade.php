@@ -3,7 +3,7 @@
 <head>
     <title>Laravel</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300|Lato:bold" rel="stylesheet" type="text/css">
 
     <style>
         html, body {
@@ -33,6 +33,10 @@
         .title {
             font-size: 96px;
         }
+
+        th { font-weight: bold; }
+
+        td { text-align: left; }
     </style>
 </head>
 <body>
@@ -53,16 +57,33 @@
         <tr>
             <th>URL</th>
             <th>Created at</th>
-            <th>Checked at</th>
-            <th>Failures</th>
         </tr>
         <tr>
             <td>{{ $monitor->url }}</td>
             <td>{{ $monitor->created_at }}</td>
-            <td></td>
-            <td></td>
         </tr>
     </table>
+
+
+    <h2>Website Quality Checks</h2>
+
+    <table border="1" align="center" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Result</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($quality_checks as $qc)
+            <tr>
+                <td>{{ $qc->name }}</td>
+                <td>{{ $results[$qc->id] }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
 
     <br>
 
@@ -89,30 +110,7 @@
         @endforeach
     </table>
 
-    <br>
 
-    <hr>
-
-    <br>
-
-    <h2>Quality Checks</h2>
-
-    <table border="1" align="center" cellpadding="10">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Result</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($quality_checks as $qc)
-        <tr>
-            <td>{{ $qc->name }}</td>
-            <td>{{ $qc->result }}</td>
-        </tr>
-        @endforeach
-        </tbody>
-    </table>
 </div>
 </body>
 </html>

@@ -37,7 +37,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Website Quality Monitor - Monitors</h1>
+    <h1>Website Quality Monitor</h1>
     <p>This system checks websites on a daily basis and reports back his findings to you. Your websites will get better and better baby.</p>
 
     <hr>
@@ -53,18 +53,12 @@
         <tr>
             <th>URL</th>
             <th>Pages</th>
-            <th>Created at</th>
-            <th>Checked at</th>
-            <th>Failures</th>
             <th></th>
         </tr>
         @foreach( $monitors as $m )
         <tr>
             <td>{{ $m->url }}</td>
             <td>{{ $m->urls()->count() }}</td>
-            <td>{{ $m->created_at }}</td>
-            <td></td>
-            <td></td>
             <td><a href="{{ url('monitor/show', [$m->id]) }}">View</a> &middot; <a href="{{ url('monitor/destroy', [$m->id]) }}">Delete</a></td>
         </tr>
         @endforeach
